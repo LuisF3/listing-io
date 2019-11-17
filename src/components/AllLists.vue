@@ -33,18 +33,14 @@
     <!--Itens-->
     <div class="w-100 row">
       <!--Item-->
-      <div class="pb-0 col-lg-3 col-12 mt-4">
-        <div v-for="list in lists"
-          class="rounded-lg font-semibold text-md text-white px-3 py-2 d-flex" :style="background-color: {list.color}"
-        >
+      <div v-for="list in allLists" class="pb-0 col-lg-3 col-12 mt-4">
+        <div class="rounded-lg font-semibold text-md text-white px-3 py-2 d-flex" :style= "'background_color: ' + list.color">
           <span class="mr-auto">{list.title}</span>
           <i class="fas fa-edit text-white pr-1"></i>
           <i class="fas fa-times text-white"></i>
         </div>
         <!--Checklist-->
-        <div v-for="listItem in listItems"
-          class="mt-0-2rem d-flex flex-column py-2 px-3 bg-gray-200 rounded-lg"
-        >
+        <div class="mt-0-2rem d-flex flex-column py-2 px-3 bg-gray-200 rounded-lg">
           <span class="text-sm overflow-hidden">{listItem.description}</span>
         </div>
       </div>
@@ -59,6 +55,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class AllLists extends Vue {
+  private allLists: any[] = [];
+
   private addListForm = {
     title: "",
     description: "",
@@ -67,6 +65,11 @@ export default class AllLists extends Vue {
 
   constructor() {
     super();
+    this.axios
+      .get("http://localhost:1337/list/getAll", {headers: {Authorization: 'token ' + Vue.prototype.userToken}})
+      .then(response => {
+        this.allLists = response.data;
+      });
   }
 
   addList() {
