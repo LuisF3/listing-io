@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"/>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -146,51 +143,53 @@ export default class App extends Vue {
 </script>
 
 <style>
-.py-0-35 {
-  padding-top: 0.35rem;
-  padding-bottom: 0.35rem;
-}
+  @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-.focus-purple:focus {
-  border-color: #5a54ff !important;
-}
-
-.main-index-vh {
-  height: 91.7vh;
-}
-
-.mt-0-2rem {
-  margin-top: 0.2rem;
-}
-
-@media (max-width: 768px) {
-  .w-md-25 {
-    width: 25% !important;
+  .py-0-35 {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
 
-  .w-md-75 {
-    width: 75% !important;
+  .focus-purple:focus {
+    border-color: #5a54ff !important;
   }
-}
 
-.bg-index {
-  background-image: url("assets/index-bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
+  .main-index-vh {
+    height: 91.7vh;
+  }
 
-.flex-basis-100 {
-  flex-basis: 100%;
-}
+  .mt-0-2rem {
+    margin-top: 0.2rem;
+  }
 
-.min-width-23-5 {
-  min-width: 23.5%;
-}
+  @media (max-width: 768px) {
+    .w-md-25 {
+      width: 25% !important;
+    }
 
-input.form-control {
-  line-height: 1rem;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-}
+    .w-md-75 {
+      width: 75% !important;
+    }
+  }
+
+  .bg-index {
+    background-image: url("assets/index-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .flex-basis-100 {
+    flex-basis: 100%;
+  }
+
+  .min-width-23-5 {
+    min-width: 23.5%;
+  }
+
+  input.form-control {
+    line-height: 1rem;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
 </style>

@@ -1,10 +1,9 @@
 <template>
-  <main class="md:w-3/4 p-4 container">
+  <main class="md:w-3/4 p-4 container" v-on:click="print()">
     <div class="row">
       <div class="col col-md-8 col-xl-4 shadow border container p-4 my-4">
         <div class="row align-items-center">
-          <label class="col-12 col-md-5 font-weight-bold" for="title">Título:
-          </label>
+          <label class="col-12 col-md-5 font-weight-bold" for="title">Título:</label>
           <input v-model="addListForm.title" class="col-12 col-md-7 form-control mb-3" type="text" id="title"/>
           <label class="col-12 col-md-5 font-weight-bold" for="description"
             >Descrição:
@@ -34,14 +33,14 @@
     <div class="w-100 row">
       <!--Item-->
       <div v-for="list in allLists" class="pb-0 col-lg-3 col-12 mt-4">
-        <div class="rounded-lg font-semibold text-md text-white px-3 py-2 d-flex" :style= "'background_color: ' + list.color">
-          <span class="mr-auto">{list.title}</span>
+        <div class="rounded-lg font-semibold text-md text-white px-3 py-2 d-flex align-items-center" :style= "'background-color: ' + list.color">
+          <span class="mr-auto">{{ list.title }}</span>
           <i class="fas fa-edit text-white pr-1"></i>
           <i class="fas fa-times text-white"></i>
         </div>
         <!--Checklist-->
         <div class="mt-0-2rem d-flex flex-column py-2 px-3 bg-gray-200 rounded-lg">
-          <span class="text-sm overflow-hidden">{listItem.description}</span>
+          <span v-if="!allLists.listItems" class="text-sm overflow-hidden">Esta lista ainda não possui nenhum item</span>
         </div>
       </div>
       <!-------->
@@ -68,13 +67,19 @@ export default class AllLists extends Vue {
     this.axios
       .get("http://localhost:1337/list/getAll", {headers: {Authorization: 'token ' + Vue.prototype.userToken}})
       .then(response => {
-        this.allLists = response.data;
+        for (let list of response.data) {
+          this.allLists.push(list);
+        }
       });
   }
 
   addList() {
-    console.log(this.addListForm);
+    this.axios
+      .post("http://localhost:1337/list/create", this.addListForm, {headers: {Authorization: 'token ' + Vue.prototype.userToken}})
+      .then(response => this.allLists.push(response.data))
   }
+
+  print() {}
 }
 </script>
 
