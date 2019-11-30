@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Template da lista</title>
+</head>
+<body>
+    <div class="md:w-4/5 p-4">
+        <!--Informações gerais-->
+        <div class="row">
+            <div class="col col-md-8 col-xl-4 shadow-sm border container p-4 my-4">
+                <h4 class="mb-3 font-weight-semibold text-secondary text-center">Informações gerais</h4>
+                <div class="row align-items-center pr-2">
+                <label class="col-12 col-md-4 font-weight-bold" for="title">Título:</label>
+                <input v-model="addListForm.title" class="col-12 col-md-8 form-control mb-3" type="text" id="title"/>
+                <label class="col-12 col-md-4 font-weight-bold" for="description">Descrição:
+                </label>
+                <input v-model="addListForm.description" class="col-12 col-md-8 form-control mb-3" type="text" id="description" />
+                <label class="col-12 col-md-4 font-weight-bold">Cor: </label>
+                <span class="col-12 col-md-8 d-flex justify-content-center mb-3">
+                    <button type="button" class="rounded-pill bg-primary mr-3" v-on:click="addListForm.color = '#007bff'" style="height: 25px; width: 25px;"></button>
+                    <button type="button" class="rounded-pill bg-warning mr-3" v-on:click="addListForm.color = '#ffc107'" style="height: 25px; width: 25px;"></button>
+                    <button type="button" class="rounded-pill bg-success mr-3" v-on:click="addListForm.color = '#28a745'" style="height: 25px; width: 25px;"></button>
+                    <button type="button" class="rounded-pill bg-danger mr-3" v-on:click="addListForm.color = '#dc3545'" style="height: 25px; width: 25px;"></button>
+                    <button type="button" class="rounded-pill purple-600 mr-3" v-on:click="addListForm.color = '#805ad5'" style="height: 25px; width: 25px;"></button>
+                    <button type="button" class="rounded-pill teal-500" v-on:click="addListForm.color = '#38b2ac'" style="height: 25px; width: 25px;"></button>
+                </span>
+                <span class="col-12 text-center">
+                    <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button">Salvar alterações</button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <!---------------------->
+
+        <!--Formulário de item da lista-->
+        <div class="row">
+            <div class="col col-md-8 col-xl-4 shadow-sm border container p-4 my-4">
+                <h4 class="mb-3 font-weight-semibold text-secondary text-center">Nova tarefa</h4>
+                <div class="row align-items-center pr-2">
+                <label class="col-12 col-md-4 font-weight-bold" for="description">Descrição:</label>
+                <input v-model="listItemForm.description" class="col-12 col-md-8 form-control mb-3" type="text" id="description"/>
+                <label class="col-12 col-md-4 font-weight-bold" for="type">Categoria:</label>
+                <select v-model="listItemForm.type" class="col-12 col-md-8 form-control mb-3 text-center">
+                    <option value="lembrete">Lembrete</option>
+                    <option value="evento">Evento</option>
+                    <option value="meta">Meta</option>
+                </select>
+                <label class="col-12 col-md-4 font-weight-bold">Concluído:</label>
+                <select v-model="listItemForm.isDone" class="col-12 col-md-8 form-control mb-3 text-center">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </select>
+                <span class="col-12 text-center">
+                    <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button">Adicionar</button>
+                </span>
+            </div> 
+        </div>
+        <!------------------------------->
+        </div>
+
+        <!--Lista de itens-->
+        <div class="col col-md-7 container p-4 my-4">
+            <h4 class="mb-4 font-weight-semibold text-secondary text-center">Minhas tarefas</h4>
+            <div class="row mx-auto">
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Todas</button>
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Em andamento</button>
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Concluídas</button>
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Lembretes</button>
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Evento</button>
+                <button type="menu" class="btn-primary no-outline font-weight-semibold px-3 py-2">Metas</button>
+            </div>
+            <div class="border py-2">
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 hover-primary">Descrição de lembrete em andamento</span>
+                    </div>
+                    <div class="col-6"></div>
+                    <div class="col-1">
+                        <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 text-secondary" style="text-decoration: line-through;">Descrição de lembrete concluído</span>
+                    </div>
+                    <div class="col-6"></div>
+                    <div class="col-1">
+                        <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 hover-primary">Descrição de evento em andamento</span>
+                    </div>
+                    <div class="col-6 text-center">
+                        <input type="date" class="no-outline"/>
+                    </div>
+                    <div class="col-1">
+                      <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 text-secondary" style="text-decoration: line-through;">Descrição de evento concluído</span>
+                    </div>  
+                    <div class="col-6 text-center">
+                        <input type="date" class="no-outline"/>
+                    </div>
+                    <div class="col-1">
+                       <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 hover-primary">Descrição de meta em andamento</span>
+                    </div>
+                    <div class="col-6">
+                        <div class="row container">
+                            <button class="bg-primary"></button>
+                            <input type="number" class="border"/>
+                            <span class="px-2">/</span>
+                            <input type="number" class="border"/>
+                            <button class="bg-primary"></button>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                       <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+                <div class="m-3 row">
+                    <div class="col-5 text-truncate">
+                        <input type="checkbox" id="isDone"/>
+                        <span class="ml-2 text-secondary" style="text-decoration: line-through;">Descrição de meta concluída</span>
+                    </div>  
+                    <div class="col-6">
+                        <div class="row container">
+                            <button type="button" class="bg-primary"></button>
+                            <input type="number" class="border"/>
+                            <span class="px-2">/</span>
+                            <input type="number" class="border"/>
+                            <button type="button" class="bg-primary"></button>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button><font-awesome-icon icon="fa-trash"/></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+<style>
+  .py-0-35 {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .focus-purple:focus {
+    border-color: #5a54ff !important;
+  }
+
+  .main-index-vh {
+    height: 91.7vh;
+  }
+
+  .mt-0-2rem {
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .w-md-25 {
+      width: 25% !important;
+    }
+
+    .w-md-75 {
+      width: 75% !important;
+    }
+  }
+
+  .flex-basis-100 {
+    flex-basis: 100%;
+  }
+
+  .min-width-23-5 {
+    min-width: 23.5%;
+  }
+
+  input.form-control {
+    line-height: 1rem;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .font-weight-semibold {
+    font-weight: 600 !important;
+  }
+
+  .text-lg {
+    font-size: 1.125rem !important;
+  }
+
+  .hover-primary:hover{
+    color : #007BFF !important;
+  }
+
+  .py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+
+  .px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .mb-20 {
+    margin-bottom: 5rem;
+  }
+
+  .mt-16 {
+    margin-top: 4rem; 
+  }
+
+  .mt-36 {
+    margin-top: 9rem;
+  }
+
+  .no-outline {
+    border: none !important;
+  }
+
+  .purple-600 {
+    background-color: #805ad5;
+  }
+
+  .teal-500 {
+    background-color: #38b2ac;
+  }
+</style>
+</html>

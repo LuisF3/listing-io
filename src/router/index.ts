@@ -11,6 +11,10 @@ const routes = [
     component: Home
   },
   {
+    path: "/signup",
+    component: () => import("../views/Signup.vue")
+  },
+  {
     path: "/private",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

@@ -4,8 +4,8 @@
       <div class="col col-md-8 col-xl-4 shadow border container p-4 my-4">
         <div class="row align-items-center">
           <label class="col-12 col-md-5 font-weight-bold" for="title"
-            >Título:</label
-          >
+            >Título:
+          </label>
           <input
             v-model="addListForm.title"
             v-bind:class="{
@@ -121,14 +121,14 @@
           <span
             class="text-sm overflow-hidden"
             v-bind:class="{ 'crossed-text': listItem.isDone }"
-            >{{ listItem.description }}</span
-          >
+            >{{ listItem.description }}
+          </span>
         </div>
         <!------------>
       </div>
       <!-------->
     </div>
-    <!--------->
+    <!-------->
   </main>
 </template>
 
