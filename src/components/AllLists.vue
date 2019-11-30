@@ -1,16 +1,16 @@
 <template>
   <main class="md:w-3/4 p-4 container" v-on:click="print()">
     <div class="row">
-      <div class="col col-md-8 col-xl-4 shadow border container p-4 my-4">
-        <div class="row align-items-center">
-          <label class="col-12 col-md-5 font-weight-bold" for="title">Título:</label>
-          <input v-model="addListForm.title" class="col-12 col-md-7 form-control mb-3" type="text" id="title"/>
-          <label class="col-12 col-md-5 font-weight-bold" for="description"
+      <div class="col col-md-8 col-xl-4 shadow-sm border container p-4 my-4">
+        <div class="row align-items-center pr-2">
+          <label class="col-12 col-md-4 font-weight-bold" for="title">Título:</label>
+          <input v-model="addListForm.title" class="col-12 col-md-8 form-control mb-3" type="text" id="title"/>
+          <label class="col-12 col-md-4 font-weight-bold" for="description"
             >Descrição:
           </label>
-          <input v-model="addListForm.description" class="col-12 col-md-7 form-control mb-3" type="text" id="description" />
-          <label class="col-12 col-md-5 font-weight-bold">Cor: </label>
-          <span class="col-12 col-md-7 d-flex justify-content-around mb-3">
+          <input v-model="addListForm.description" class="col-12 col-md-8 form-control mb-3" type="text" id="description" />
+          <label class="col-12 col-md-4 font-weight-bold">Cor: </label>
+          <span class="col-12 col-md-8 d-flex justify-content-around mb-3">
             <button type="button" class="rounded-pill bg-primary" v-on:click="addListForm.color = '#007bff'" style="height: 25px; width: 25px;"></button>
             <button type="button" class="rounded-pill bg-warning" v-on:click="addListForm.color = '#ffc107'" style="height: 25px; width: 25px;"></button>
             <button type="button" class="rounded-pill bg-success" v-on:click="addListForm.color = '#28a745'" style="height: 25px; width: 25px;"></button>
@@ -19,7 +19,7 @@
             <button type="button" class="rounded-pill teal-500" v-on:click="addListForm.color = '#38b2ac'" style="height: 25px; width: 25px;"></button>
           </span>
           <span class="col-12 text-center">
-            <button class="btn btn-primary" type="button" v-on:click="addList()">Adicionar lista</button>
+            <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button" v-on:click="addList()">Adicionar lista</button>
           </span>
         </div>
       </div>
@@ -45,7 +45,7 @@
       </div>
       <!-------->
     </div>
-    <!--------->
+    <!-------->
   </main>
 </template>
 

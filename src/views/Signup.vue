@@ -14,7 +14,7 @@
                         <input class="bg-gray-300 rounded-pill py-1 m-2 px-3 border-2 focus-purple placeholder-gray-700" type="text" placeholder="Nome de usuário" v-model="username"/>
                         <input class="bg-gray-300 rounded-pill py-1 m-2 px-3 border-2 focus-purple placeholder-gray-700" type="password" placeholder="Senha" v-model="password"/>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-md rounded-pill px-5 my-3 font-weight-semibold">Criar conta</button>
+                    <button type="submit" class="btn btn-primary btn-md rounded-pill px-5 my-3 font-weight-semibold" v-on:click="register()">Criar conta</button>
                 </form>
             </div>
         </div>
@@ -32,5 +32,16 @@
         private name: string = "";
         private username: string = "";
         private password: string = "";
+
+        register() {
+            this.axios
+              .post("http://localhost:1337/register/", {
+                  email: this.email,
+                  name: this.name,
+                  username: this.username,
+                  password: this.password
+              })
+              .then();
+        }
     }
 </script>

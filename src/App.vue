@@ -189,4 +189,12 @@ export default class App extends Vue {
   .no-outline {
     border: none !important;
   }
+
+  .purple-600 {
+    background-color: #805ad5;
+  }
+
+  .teal-500 {
+    background-color: #38b2ac;
+  }
 </style>
