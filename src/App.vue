@@ -6,110 +6,53 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <!--Navbar deslogada-->
-    <nav
-      v-if="!userToken"
-      class="navbar navbar-expand-lg navbar-light bg-white shadow-md px-4"
-    >
-      <a class="navbar-brand font-semibold" href="#">Listing.io</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+    <nav v-if="!userToken" class="navbar navbar-expand-lg navbar-light bg-white shadow-md px-4">
+      <a class="navbar-brand font-semibold" v-on:click="index()">Listing.io</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a
-              class="nav-link text-lg text-gray-600 hover:text-gray-800"
-              href="#"
-            ></a>
+            <a class="nav-link text-lg text-gray-600 hover:text-gray-800" href="#"></a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link text-lg text-gray-600 hover:text-gray-800"
-              href="#"
-            ></a>
+            <a class="nav-link text-lg text-gray-600 hover:text-gray-800" href="#"></a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link text-lg text-gray-600 hover:text-gray-800"
-              href="#"
-            ></a>
+            <a class="nav-link text-lg text-gray-600 hover:text-gray-800" href="#"></a>
           </li>
         </ul>
+
         <form class="form-inline my-2">
           <div class="text-center">
-            <input
-              class="bg-gray-300 mx-md-2 rounded-full py-0-35 px-3 border-2 focus-purple mr-4 placeholder-gray-700 mb-2 mb-md-0"
-              type="email"
-              placeholder="E-mail"
-              v-model="email"
-            />
-            <input
-              class="bg-gray-300 mx-md-2 rounded-full py-0-35 px-3 border-2 focus-purple mr-4 placeholder-gray-700"
-              type="password"
-              placeholder="Senha"
-              v-model="password"
-            />
+            <input class="bg-gray-300 mx-md-2 rounded-full py-0-35 px-3 border-2 focus-purple mr-4 placeholder-gray-700 mb-2 mb-md-0" type="email" placeholder="E-mail" v-model="email"/>
+            <input class="bg-gray-300 mx-md-2 rounded-full py-0-35 px-3 border-2 focus-purple mr-4 placeholder-gray-700" type="password" placeholder="Senha" v-model="password"/>
           </div>
           <div class="mx-auto">
-            <button
-              class="form-control btn my-sm-0 text-lg text-gray-600 font-semibold hover:text-gray-800"
-              type="button"
-              v-on:click="login()"
-            >
-              Entrar
-            </button>
-            <button
-              class="form-control btn my-sm-0 text-lg text-gray-600 font-semibold hover:text-gray-800"
-              type="button"
-            >
-              Cadastrar
-            </button>
+            <button class="form-control btn my-sm-0 text-lg text-gray-600 font-semibold hover:text-gray-800" type="button" v-on:click="login()">Entrar</button>
+            <button class="form-control btn my-sm-0 text-lg text-gray-600 font-semibold hover:text-gray-800" type="button" v-on:click="signup()">Cadastrar</button>
           </div>
         </form>
       </div>
     </nav>
+    
     <!-------------------->
     <!--Navbar logada-->
-    <nav
-      v-if="userToken"
-      class="navbar navbar-expand-lg navbar-light bg-white shadow-md px-4"
-    >
-      <a class="navbar-brand font-semibold" href="#">Listing.io</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+    <nav v-if="userToken" class="navbar navbar-expand-lg navbar-light bg-white shadow-md px-4">
+      <a class="navbar-brand font-semibold" v-on:click="index()">Listing.io</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="loggedNavbarSupportedContent">
         <form class="form-inline ml-auto">
-          <button
-            class="form-control btn my-sm-0 text-lg text-red-600 font-semibold hover:text-red-800"
-            type="button"
-            v-on:click="logout()"
-          >
-            Sair
-          </button>
+          <button class="form-control btn my-sm-0 text-lg text-red-600 font-semibold hover:text-red-800" type="button" v-on:click="logout()">Sair</button>
         </form>
       </div>
     </nav>
     <!-------------------->
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -138,6 +81,12 @@ export default class App extends Vue {
   logout() {
     Vue.prototype.userToken = "";
     router.replace("/");
+  }
+  index() {
+    router.replace("/");
+  }
+  signup() {
+    router.replace("signup/");
   }
 }
 </script>
@@ -191,5 +140,53 @@ export default class App extends Vue {
     border-top: 0;
     border-left: 0;
     border-right: 0;
+  }
+
+  .font-weight-semibold {
+    font-weight: 600 !important;
+  }
+
+  .text-lg {
+    font-size: 1.125rem !important;
+  }
+
+  .hover-primary:hover{
+    color : #007BFF !important;
+  }
+
+  .py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+
+  .px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .mb-20 {
+    margin-bottom: 5rem;
+  }
+
+  .mt-16 {
+    margin-top: 4rem; 
+  }
+
+  .mt-36 {
+    margin-top: 9rem;
+  }
+
+  .no-outline {
+    border: none !important;
   }
 </style>
