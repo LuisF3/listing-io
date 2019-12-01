@@ -125,50 +125,27 @@
     </div>
 
     <!--Lista de itens-->
-    <div class="col col-md-7 container p-4 my-4">
+    <div class="col-md-7 container p-4 my-4">
       <h4 class="mb-4 font-weight-semibold text-secondary text-center">
         Minhas tarefas
       </h4>
-      <div class="row mx-auto justify-content-around bg-primary">
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Todas
-        </button>
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Em andamento
-        </button>
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Concluídas
-        </button>
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Lembretes
-        </button>
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Evento
-        </button>
-        <button
-          type="button"
-          class="btn-primary no-outline font-weight-semibold px-3 py-2"
-        >
-          Metas
-        </button>
+
+      <div>
+        <select
+            class="col-12 text-center bg-primary rounded text-white font-weight-semibold py-2"
+            id="filter"
+          >
+            <option value="lembrete">Todas</option>
+            <option value="lembrete">Concluídas</option>
+            <option value="lembrete">Em andamento</option>
+            <option value="lembrete">Lembretes</option>
+            <option value="evento">Eventos</option>
+            <option value="meta">Metas</option>
+          </select>
       </div>
-      <div class="border py-2">
-        <div class="m-3 row">
+
+      <div class="container-fluid pb-2">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" />
             <span class="ml-2 hover-primary"
@@ -180,7 +157,7 @@
             <button><i class="fa-trash" /></button>
           </div>
         </div>
-        <div class="m-3 row">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" />
             <span
@@ -194,7 +171,7 @@
             <button><i class="fa-trash" /></button>
           </div>
         </div>
-        <div class="m-3 row">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" />
             <span class="ml-2 hover-primary"
@@ -202,13 +179,13 @@
             >
           </div>
           <div class="col-6 text-center">
-            <input type="date" class="no-outline" />
+            <input type="date" class="no-outline bg-light" />
           </div>
           <div class="col-1">
             <button><i class="fa-trash" /></button>
           </div>
         </div>
-        <div class="m-3 row">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" />
             <span
@@ -218,13 +195,13 @@
             >
           </div>
           <div class="col-6 text-center">
-            <input type="date" class="no-outline" />
+            <input type="date" class="no-outline bg-light" />
           </div>
           <div class="col-1">
             <button><i class="fa-trash" /></button>
           </div>
         </div>
-        <div class="m-3 row">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" />
             <span class="ml-2 hover-primary"
@@ -244,7 +221,7 @@
             <button><i class="fa-trash" /></button>
           </div>
         </div>
-        <div class="m-3 row">
+        <div class="bg-light my-2 py-2 row rounded">
           <div class="col-5 text-truncate">
             <input type="checkbox" id="isDone" />
             <span

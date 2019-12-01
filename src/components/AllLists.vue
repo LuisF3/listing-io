@@ -65,7 +65,7 @@
           </span>
           <span class="col-12 text-center">
             <button
-              class="btn btn-primary"
+              class="btn btn-primary rounded-pill font-weight-semibold mt-2"
               type="button"
               v-on:click="addList()"
             >
