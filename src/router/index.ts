@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import AllLists from '@/components/AllLists.vue';
+import AllLists from "@/components/AllLists.vue";
+import List from "@/components/List.vue";
 
 Vue.use(VueRouter);
 
@@ -21,8 +22,8 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import("../views/Private.vue"),
     children: [
-      { path: "/", component: AllLists },
-      { path: "/:listId", component: AllLists }
+      { path: "", component: AllLists },
+      { path: ":listId", component: List }
     ]
   }
 ];

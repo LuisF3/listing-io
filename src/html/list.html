@@ -15,10 +15,9 @@
                 <h4 class="mb-3 font-weight-semibold text-secondary text-center">Informações gerais</h4>
                 <div class="row align-items-center pr-2">
                 <label class="col-12 col-md-4 font-weight-bold" for="title">Título:</label>
-                <input v-model="addListForm.title" class="col-12 col-md-8 form-control mb-3" type="text" id="title"/>
-                <label class="col-12 col-md-4 font-weight-bold" for="description">Descrição:
-                </label>
-                <input v-model="addListForm.description" class="col-12 col-md-8 form-control mb-3" type="text" id="description" />
+                <input class="col-12 col-md-8 form-control mb-3" type="text" id="title"/>
+                <label class="col-12 col-md-4 font-weight-bold" for="listDescription">Descrição:</label>
+                <input class="col-12 col-md-8 form-control mb-3" type="text" id="listDescription" />
                 <label class="col-12 col-md-4 font-weight-bold">Cor: </label>
                 <span class="col-12 col-md-8 d-flex justify-content-center mb-3">
                     <button type="button" class="rounded-pill bg-primary mr-3" v-on:click="addListForm.color = '#007bff'" style="height: 25px; width: 25px;"></button>
@@ -42,22 +41,22 @@
                 <h4 class="mb-3 font-weight-semibold text-secondary text-center">Nova tarefa</h4>
                 <div class="row align-items-center pr-2">
                 <label class="col-12 col-md-4 font-weight-bold" for="description">Descrição:</label>
-                <input v-model="listItemForm.description" class="col-12 col-md-8 form-control mb-3" type="text" id="description"/>
+                <input class="col-12 col-md-8 form-control mb-3" type="text" id="description"/>
                 <label class="col-12 col-md-4 font-weight-bold" for="type">Categoria:</label>
-                <select v-model="listItemForm.type" class="col-12 col-md-8 form-control mb-3 text-center">
+                <select class="col-12 col-md-8 form-control mb-3 text-center" id="type">
                     <option value="lembrete">Lembrete</option>
                     <option value="evento">Evento</option>
                     <option value="meta">Meta</option>
                 </select>
-                <label class="col-12 col-md-4 font-weight-bold">Concluído:</label>
-                <select v-model="listItemForm.isDone" class="col-12 col-md-8 form-control mb-3 text-center">
+                <label class="col-12 col-md-4 font-weight-bold" for="isDone">Concluído:</label>
+                <select class="col-12 col-md-8 form-control mb-3 text-center" id="isDone">
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </select>
                 <span class="col-12 text-center">
                     <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button">Adicionar</button>
                 </span>
-            </div> 
+            </div>
         </div>
         <!------------------------------->
         </div>
@@ -110,7 +109,7 @@
                     <div class="col-5 text-truncate">
                         <input type="checkbox" id="isDone"/>
                         <span class="ml-2 text-secondary" style="text-decoration: line-through;">Descrição de evento concluído</span>
-                    </div>  
+                    </div>
                     <div class="col-6 text-center">
                         <input type="date" class="no-outline"/>
                     </div>
@@ -140,7 +139,7 @@
                     <div class="col-5 text-truncate">
                         <input type="checkbox" id="isDone"/>
                         <span class="ml-2 text-secondary" style="text-decoration: line-through;">Descrição de meta concluída</span>
-                    </div>  
+                    </div>
                     <div class="col-6">
                         <div class="row container">
                             <button type="button" class="bg-primary"></button>
@@ -244,7 +243,7 @@
   }
 
   .mt-16 {
-    margin-top: 4rem; 
+    margin-top: 4rem;
   }
 
   .mt-36 {

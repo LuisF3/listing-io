@@ -82,7 +82,10 @@
     <!---------->
     <!--Itens-->
     <div class="w-100 row">
-      <div v-if="allLists.length === 0" class="text-center w-100 mt-4">
+      <div
+        v-if="!allLists || allLists.length === 0"
+        class="text-center w-100 mt-4"
+      >
         <h3>Você não tem nenhuma lista!</h3>
       </div>
       <!--Item-->
@@ -95,13 +98,12 @@
           class="rounded-lg font-semibold text-md text-white px-3 py-2 d-flex align-items-center"
           v-bind:style="{ 'background-color': list.color }"
         >
-          <span class="mr-auto">{{ list.title }}</span>
-          <i class="fas fa-edit text-white pr-1" />
-          <i class="fas fa-times text-white" />
+          <a class="mr-auto hover-underline" v-on:click="goToList(list.id)">{{ list.title }}</a>
+          <i v-on:click="deleteList(list.id)" class="fas fa-times text-white" />
         </div>
         <!-- Sem items-->
         <div
-          v-if="list.listItems.length === 0"
+          v-if="!list.listItems || list.listItems.length === 0"
           class="mt-0-2rem d-flex flex-column py-2 px-3 bg-gray-200 rounded-lg"
         >
           <span class="text-sm overflow-hidden"
@@ -134,6 +136,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import router from "@/router";
 
 @Component
 export default class AllLists extends Vue {
@@ -142,12 +145,18 @@ export default class AllLists extends Vue {
   private addListForm = {
     title: "",
     description: "",
-    color: ""
+    color: "#007bff"
   };
   private incorrectAddListForm: boolean = false;
 
   constructor() {
     super();
+
+    if (Vue.prototype.userToken === "") {
+      router.replace("/");
+      return;
+    }
+
     this.axios
       .get("http://localhost:1337/list/getAll", {
         headers: { Authorization: "token " + Vue.prototype.userToken }
@@ -163,16 +172,33 @@ export default class AllLists extends Vue {
       return;
     }
 
-    this.incorrectAddListForm = false;
-    this.addListForm.title = "";
-    this.addListForm.color = "";
-    this.addListForm.description = "";
-
     this.axios
-      .post("http://localhost:1337/list/create", this.addListForm, {
+      .post("http://localhost:1337/list", this.addListForm, {
         headers: { Authorization: "token " + Vue.prototype.userToken }
       })
       .then(response => this.allLists.push(response.data));
+
+    this.incorrectAddListForm = false;
+    // this.addListForm.title = "";
+    // this.addListForm.description = "";
+    // this.addListForm.color = "#007bff";
+  }
+
+  deleteList(id: number) {
+    console.log(id);
+    this.axios
+      .delete("http://localhost:1337/list/" + id.toString(), {
+        headers: { Authorization: "token " + Vue.prototype.userToken }
+      })
+      .then(response => {
+        const itemIndex = this.allLists.findIndex(item => item.id === id);
+        console.log(itemIndex);
+        this.allLists.splice(itemIndex, 1);
+      });
+  }
+
+  goToList(id: number) {
+    router.push(id.toString());
   }
 
   print() {}
@@ -181,6 +207,9 @@ export default class AllLists extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hover-underline:hover {
+  text-decoration: underline;
+}
 .crossed-text {
   text-decoration: line-through;
 }

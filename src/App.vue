@@ -139,7 +139,7 @@ export default class App extends Vue {
       .then(
         response => {
           Vue.prototype.userToken = response.data.token;
-          router.replace("private/");
+          router.replace("/private/");
           this.email = "";
           this.password = "";
         },
@@ -157,7 +157,7 @@ export default class App extends Vue {
     router.replace("/");
   }
   signup() {
-    router.replace("signup/");
+    router.replace("/signup/");
   }
 }
 </script>
