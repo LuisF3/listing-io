@@ -61,7 +61,7 @@
       </h4>
 
       <div>
-        <select class="col-12 text-center bg-primary rounded text-white font-weight-semibold py-2" id="filter">
+        <select v-on:click="debug()" class="col-12 text-center bg-primary rounded text-white font-weight-semibold py-2" id="filter">
           <option value="lembrete">Todas</option>
           <option value="lembrete">Concluídas</option>
           <option value="lembrete">Em andamento</option>
@@ -70,6 +70,12 @@
           <option value="meta">Metas</option>
         </select>
       </div>
+
+      <!-- Lista Vazia -->
+      <div v-if="!listItems || listItems.length === 0" class="text-center text-primary border py-3">
+        <span class="font-weight-bold">O filtro selecionado não resultou em nenhuma lista</span>
+      </div>
+      <!----------------->
 
       <div class="container-fluid pb-2" v-for="item in listItems" v-bind:key="item.id">
         <div class="bg-light my-2 py-2 row rounded">
@@ -110,17 +116,18 @@
           <!-------------->
         </div>
       </div>
-    </div>          
+    </div>
   <!------------------>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
+import router from '@/router';
 
 @Component
 export default class List extends Vue {
-
+  private list: any = {};
   private listItems: any[] = [];
 
   private listItemForm = {
@@ -137,19 +144,22 @@ export default class List extends Vue {
 
   constructor() {
     super();
+    const listId = router.currentRoute.params['listId'];
+    this.axios.get('http://localhost:1337/list/' + listId, {
+      headers: { Authorization: "token " + Vue.prototype.userToken }
+    }).then(response => {
+      this.list = {
+        title: response.data['title'],
+        description: response.data['description'],
+        color: response.data['color'],
+        listItems: response.data['listItems'],
+      };
+      this.listItems = this.list.listItems;
+    });
+  }
 
-    // this.axios
-    //   .get("http://localhost:1337/list/getListData/", {
-    //     headers: { Authorization: "token " + Vue.prototype.userToken }
-    //   })
-    //   .then(response => {
-    //     this.addListForm.title = response.data.title;
-    //     this.addListForm.description = response.data.description;
-    //     this.addListForm.color = response.data.color;
-    //     for (let listItem of response.data.listItems) {
-    //       this.listItems.push(listItem);
-    //     }
-    //   });
+  debug() {
+    console.log(this.list);
   }
 }
 </script>

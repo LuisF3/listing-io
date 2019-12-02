@@ -185,7 +185,6 @@ export default class AllLists extends Vue {
   }
 
   deleteList(id: number) {
-    console.log(id);
     this.axios
       .delete("http://localhost:1337/list/" + id.toString(), {
         headers: { Authorization: "token " + Vue.prototype.userToken }
