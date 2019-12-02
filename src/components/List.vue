@@ -1,25 +1,27 @@
 <template>
-  <div class="mx-auto md:w-4/5 p-4">
+  <div class="container mx-auto md:w-4/5 p-4">
     <!--Informações gerais-->
     <div class="row">
-      <div class="col col-md-8 col-xl-4 shadow-sm border container p-4 my-4">
-        <h4 class="mb-3 font-weight-semibold text-secondary text-center">Informações gerais</h4>
-        <div class="row align-items-center pr-2">
+      <div class="col col-md-8 col-xl-5 shadow-sm border container my-4">
+        <div class="row">
+          <h4 class="w-100 mb-3 font-weight-semibold text-white text-center p-2" v-bind:style="{ 'background-color': list.color }">Informações gerais</h4>
+        </div>
+        <div class="row align-items-center p-4">
           <label class="col-12 col-md-4 font-weight-bold" for="title">Título:</label>
-          <input class="col-12 col-md-8 form-control mb-3" type="text" id="title"/>
+          <input class="col-12 col-md-8 form-control mb-3" type="text" id="title" v-model="list.title"/>
           <label class="col-12 col-md-4 font-weight-bold" for="listDescription">Descrição:</label>
-          <input class="col-12 col-md-8 form-control mb-3" type="text" id="listDescription"/>
+          <input class="col-12 col-md-8 form-control mb-3" type="text" id="listDescription" v-model="list.description"/>
           <label class="col-12 col-md-4 font-weight-bold">Cor: </label>
           <span class="col-12 col-md-8 d-flex justify-content-center mb-3">
-            <button type="button" class="rounded-pill bg-primary mr-3" v-on:click="addListForm.color = '#007bff'" style="height: 25px; width: 25px;"/>
-            <button type="button" class="rounded-pill bg-warning mr-3" v-on:click="addListForm.color = '#ffc107'" style="height: 25px; width: 25px;"/>
-            <button type="button" class="rounded-pill bg-success mr-3" v-on:click="addListForm.color = '#28a745'" style="height: 25px; width: 25px;"/>
-            <button type="button" class="rounded-pill bg-danger mr-3" v-on:click="addListForm.color = '#dc3545'" style="height: 25px; width: 25px;"/>
-            <button type="button" class="rounded-pill purple-600 mr-3" v-on:click="addListForm.color = '#805ad5'" style="height: 25px; width: 25px;"/>
-            <button type="button" class="rounded-pill teal-500" v-on:click="addListForm.color = '#38b2ac'" style="height: 25px; width: 25px;"/>
+            <button type="button" class="rounded-pill bg-primary mr-3" style="height: 25px; width: 25px;" v-on:click="colorChange('#007bff')"/>
+            <button type="button" class="rounded-pill bg-warning mr-3" style="height: 25px; width: 25px;" v-on:click="colorChange('#ffc107')"/>
+            <button type="button" class="rounded-pill bg-success mr-3" style="height: 25px; width: 25px;" v-on:click="colorChange('#28a745')"/>
+            <button type="button" class="rounded-pill bg-danger mr-3" style="height: 25px; width: 25px;" v-on:click="colorChange('#dc3545')"/>
+            <button type="button" class="rounded-pill purple-600 mr-3" style="height: 25px; width: 25px;" v-on:click="colorChange('#805ad5')"/>
+            <button type="button" class="rounded-pill teal-500" style="height: 25px; width: 25px;" v-on:click="colorChange('#38b2ac')"/>
           </span>
           <span class="col-12 text-center">
-            <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button">Salvar alterações</button>
+            <button class="btn text-white rounded-pill mt-2 font-weight-semibold" type="button" v-bind:style="{ 'background-color': list.color }">Salvar alterações</button>
           </span>
         </div>
       </div>
@@ -28,26 +30,28 @@
 
     <!--Formulário de item da lista-->
     <div class="row">
-      <div class="col col-md-8 col-xl-4 shadow-sm border container p-4 my-4">
-        <h4 class="mb-3 font-weight-semibold text-secondary text-center">
-          Nova tarefa
-        </h4>
-        <div class="row align-items-center pr-2">
+      <div class="col col-md-8 col-xl-5 shadow-sm border container my-4">
+        <div class="row">
+          <h4 class="w-100 mb-3 font-weight-semibold text-white text-center p-2" v-bind:style="{ 'background-color': list.color }">
+            Nova tarefa
+          </h4>
+        </div>
+        <div class="row align-items-center p-4">
           <label class="col-12 col-md-4 font-weight-bold" for="description">Descrição:</label>
-          <input class="col-12 col-md-8 form-control mb-3" type="text" id="description"/>
+          <input class="col-12 col-md-8 form-control mb-3" type="text" id="description" v-model="listItemForm.description"/>
           <label class="col-12 col-md-4 font-weight-bold" for="type">Categoria:</label>
-          <select class="col-12 col-md-8 form-control mb-3 text-center" id="type">
+          <select class="col-12 col-md-8 form-control mb-3 text-center" id="type" v-model="listItemForm.type">
             <option value="lembrete">Lembrete</option>
             <option value="evento">Evento</option>
             <option value="meta">Meta</option>
           </select>
           <label class="col-12 col-md-4 font-weight-bold" for="createIsDone">Concluído:</label>
-          <select class="col-12 col-md-8 form-control mb-3 text-center" id="createIsDone">
+          <select class="col-12 col-md-8 form-control mb-3 text-center" id="createIsDone" v-model="listItemForm.isDone">
             <option value="true">Sim</option>
             <option value="false">Não</option>
           </select>
           <span class="col-12 text-center">
-            <button class="btn btn-primary rounded-pill mt-2 font-weight-semibold" type="button">Adicionar</button>
+            <button class="btn text-white border-0 rounded-pill mt-2 font-weight-semibold" type="button" v-on:click="createListItem(this.list.id)" v-bind:style="{ 'background-color': list.color }">Adicionar</button>
           </span>
         </div>
       </div>
@@ -61,13 +65,13 @@
       </h4>
 
       <div>
-        <select v-on:click="debug()" class="col-12 text-center bg-primary rounded text-white font-weight-semibold py-2" id="filter">
-          <option value="lembrete">Todas</option>
-          <option value="lembrete">Concluídas</option>
-          <option value="lembrete">Em andamento</option>
-          <option value="lembrete">Lembretes</option>
-          <option value="evento">Eventos</option>
-          <option value="meta">Metas</option>
+        <select class="col-12 rounded text-white font-weight-semibold py-2" id="filter" v-bind:style="{ 'background-color': list.color }" v-model="this.filter">
+          <option value="todas" class="text-center">Todas</option>
+          <option value="concluidas" class="text-center">Concluídas</option>
+          <option value="emandamento" class="text-center">Em andamento</option>
+          <option value="lembretes" class="text-center">Lembretes</option>
+          <option value="eventos" class="text-center">Eventos</option>
+          <option value="metas" class="text-center">Metas</option>
         </select>
       </div>
 
@@ -77,8 +81,8 @@
       </div>
       <!----------------->
 
-      <div class="container-fluid pb-2" v-for="item in listItems" v-bind:key="item.id">
-        <div class="bg-light my-2 py-2 row rounded">
+      <div class="container-fluid pb-2">
+        <div v-for="item in listItems" v-bind:key="item.id" class="bg-light my-2 py-2 row rounded">
           <!--Descricao-->
           <div class="col-5 text-truncate">
             <input type="checkbox" v-model="item.isDone"/>
@@ -88,30 +92,30 @@
           <!------------>
 
           <!--Lembrete-->
-          <div class="col-6" v-if="item.type == lembrete"></div>
+          <div class="col-6" v-if="item.type ==='lembrete'"></div>
           <!------------>
 
           <!----Evento---->
-          <div class="col-6" v-if="item.type == evento">
-            <input type="date" class="no-outline bg-light" v-model="item.date"/>
+          <div class="col-6" v-if="item.type === 'evento'" >
+            <input type="date" class="no-outline bg-light"/>
           </div>
           <!-------------->
 
           <!----Meta---->
-          <div class="col-6" v-if="item.type == meta">
+          <div class="col-6" v-if="item.type ==='meta'">
             <div class="container">
-              <button type="button" class="bg-primary" v-on:click="item.increase()"><i class="fas fa-plus"></i></button>
-              <input type="number" class="border" v-model="item.currentQtd"/>
+              <button type="button" class="bg-primary"><i class="fas fa-plus"/></button>
+              <input type="number" class="border"/>
               <span class="px-2">/</span>
-              <input type="number" class="border" v-model="item.maxQtd"/>
-              <button type="button" class="bg-primary" v-on:click="item.decrease()"><i class="fas fa-minus"></i></button>
+              <input type="number" class="border"/>
+              <button type="button" class="bg-primary"><i class="fas fa-minus"/></button>
             </div>
           </div>
           <!------------>
 
           <!----Remover---->
           <div class="col-1">
-            <button v-on:click="item.remove()"><i class="fas fa-trash"></i></button>
+            <button v-on:click="deleteItem(item.id)"><i class="fas fa-trash"/></button>
           </div>
           <!-------------->
         </div>
@@ -127,20 +131,14 @@ import router from '@/router';
 
 @Component
 export default class List extends Vue {
+  private filter: string = "";
   private list: any = {};
-  private listItems: any[] = [];
-
   private listItemForm = {
     description: "",
     type: "",
-    isDone: ""
+    isDone: false
   };
-
-  private addListForm = {
-    title: "",
-    description: "",
-    color: ""
-  };
+  private listItems: any[] = [];
 
   constructor() {
     super();
@@ -148,18 +146,50 @@ export default class List extends Vue {
     this.axios.get('http://localhost:1337/list/' + listId, {
       headers: { Authorization: "token " + Vue.prototype.userToken }
     }).then(response => {
-      this.list = {
-        title: response.data['title'],
-        description: response.data['description'],
-        color: response.data['color'],
-        listItems: response.data['listItems'],
-      };
-      this.listItems = this.list.listItems;
+      this.list['title'] = response.data['title'];
+      this.list['description'] = response.data['description'];
+      this.list['color'] = response.data['color'];
+      this.list['listItems'] = response.data['listItems'];
+      for(const item of this.list.listItems)
+        this.listItems.push(item);
     });
   }
 
   debug() {
-    console.log(this.list);
+    console.log(this.listItemForm);
+  }
+
+  createListItem(listId: number) {
+    this.axios
+        .post("http://localhost:1337/list/" + listId.toString() + "/createListItem", {
+          headers: { Authorization: "token " + Vue.prototype.userToken }
+        })
+        .then(response => {
+          this.list.push(response.data);
+          if(this.filter === 'todas') this.listItems.push(response.data);
+          else if(this.filter === 'emandamento' && response.data['isDone'] === false) this.listItems.push(response.data);
+          else if(this.filter === 'concluidas' && response.data['isDone'] === true) this.listItems.push(response.data);
+          else if(this.filter === response.data['type']) this.listItems.push(response.data);
+        });
+  }
+
+  colorChange(color: string) {
+    this.list.color = color;
+    //TODO Patch sempre que um atributo for alterado
+  }
+
+  deleteItem(itemId: number) {
+    this.axios
+        .delete("http://localhost:1337/listItem/" + itemId.toString() , {
+          headers: { Authorization: "token " + Vue.prototype.userToken }})
+        .then(response => {
+          const listListItemIndex = this.list.listItems.findIndex((item: any) => item.id === itemId);
+          const listItemIndex = this.listItems.findIndex((item: any) => item.id === itemId);
+          console.log(listListItemIndex);
+          console.log(listItemIndex);
+          this.list.listItems.splice(listListItemIndex, 1);
+          this.listItems.splice(listItemIndex, 1);
+        });
   }
 }
 </script>
