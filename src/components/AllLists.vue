@@ -156,7 +156,6 @@ export default class AllLists extends Vue {
       router.replace("/");
       return;
     }
-
     this.axios
       .get("http://localhost:1337/list/getAll", {
         headers: { Authorization: "token " + Vue.prototype.userToken }
@@ -179,9 +178,6 @@ export default class AllLists extends Vue {
       .then(response => this.allLists.push(response.data));
 
     this.incorrectAddListForm = false;
-    // this.addListForm.title = "";
-    // this.addListForm.description = "";
-    // this.addListForm.color = "#007bff";
   }
 
   deleteList(id: number) {
@@ -191,7 +187,6 @@ export default class AllLists extends Vue {
       })
       .then(response => {
         const itemIndex = this.allLists.findIndex(item => item.id === id);
-        console.log(itemIndex);
         this.allLists.splice(itemIndex, 1);
       });
   }

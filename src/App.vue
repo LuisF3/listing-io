@@ -53,9 +53,9 @@
             <input
               class="mx-md-2 rounded-full py-0-35 px-3 mr-4 mb-2 mb-md-0 form-control"
               v-bind:class="{ 'is-invalid': incorrectLogin }"
-              type="email"
-              placeholder="E-mail"
-              v-model="email"
+              type="text"
+              placeholder="Nome de usuário"
+              v-model="username"
             />
             <input
               class="mx-md-2 rounded-full py-0-35 px-3 mr-4 mb-2 mb-md-0 form-control"
@@ -91,7 +91,7 @@
       v-if="userToken"
       class="navbar navbar-expand-lg navbar-light bg-white shadow-md px-4"
     >
-      <a class="navbar-brand font-semibold" v-on:click="index()">Listing.io</a>
+      <a class="navbar-brand font-semibold" v-on:click="home()">Listing.io</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -126,21 +126,21 @@ import router from "@/router";
 
 @Component
 export default class App extends Vue {
-  private email: string = "";
+  private username: string = "";
   private password: string = "";
   private incorrectLogin: boolean = false;
 
   login() {
     this.axios
       .post("http://localhost:1337/auth/", {
-        username: this.email,
+        username: this.username,
         password: this.password
       })
       .then(
         response => {
           Vue.prototype.userToken = response.data.token;
-          router.replace("/private/");
-          this.email = "";
+          router.push("/private/");
+          this.username = "";
           this.password = "";
         },
         error => {
@@ -151,19 +151,36 @@ export default class App extends Vue {
   }
   logout() {
     Vue.prototype.userToken = "";
-    router.replace("/");
+    router.push("/");
   }
   index() {
-    router.replace("/");
+    router.push("/");
+  }
+  home() {
+    router.push("/private/");
   }
   signup() {
-    router.replace("/signup/");
+    router.push("/signup/");
   }
 }
 </script>
 
 <style>
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+.rounded-right-0 {
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+}
+
+.rounded-left-0 {
+  border-top-left-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+}
+
+.w-175 {
+  width: 17.5% !important;
+}
 
 .py-0-35 {
   padding-top: 0.35rem;

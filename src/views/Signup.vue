@@ -39,7 +39,7 @@
             />
           </div>
           <button
-            type="submit"
+            type="button"
             class="btn btn-primary btn-md rounded-pill px-5 my-3 font-weight-semibold"
             v-on:click="register()"
           >
@@ -54,6 +54,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import router from "@/router";
 
 @Component
 export default class App extends Vue {
@@ -63,14 +64,18 @@ export default class App extends Vue {
   private password: string = "";
 
   register() {
+    console.log(this.email, this.name, this.username, this.password);
     this.axios
-      .post("http://localhost:1337/register/", {
+      .post("http://localhost:1337/register", {
         email: this.email,
         name: this.name,
         username: this.username,
         password: this.password
       })
-      .then();
+      .then(response => {
+        Vue.prototype.userToken = response.data.id;
+        router.push('/private/');
+      });
   }
 }
 </script>
