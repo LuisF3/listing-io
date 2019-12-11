@@ -2,6 +2,8 @@
 
 This is the final result of a project for the subject "SCC0219 - Introdução ao Desenvolvimento Web". We were asked to create an application for a simple TODO list. This is the frontend application, powered by Vue.
 
+The backend can be found [here](https://github.com/LuisF3/listing-io-backend) 
+
 ## Project setup
 ```
 npm install
