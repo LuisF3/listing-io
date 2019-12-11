@@ -1,24 +1,28 @@
-# listing-io-new
+# listing-io
+
+This is the final result of a project for the subject "SCC0219 - Introdução ao Desenvolvimento Web". We were asked to create an application for a simple TODO list. This is the frontend application, powered by Vue.
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Project run
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Photos:
 
-### Lints and fixes files
-```
-npm run lint
-```
+Landing-page:
+![Landing page](https://github.com/LuisF3/listing-io/blob/master/preview/landing-page.png?raw=true)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Sign up page:
+![Sign up page](https://github.com/LuisF3/listing-io/blob/master/preview/signup-page.png?raw=true)
+
+Home page:
+![Home page](https://github.com/LuisF3/listing-io/blob/master/preview/home-page.png?raw=true)
+
+Poll page:
+![Poll page 1](https://github.com/LuisF3/listing-io/blob/master/preview/list-edit-page-1.png?raw=true)
+![Poll page 2](https://github.com/LuisF3/listing-io/blob/master/preview/list-edit-page-2.png?raw=true)
